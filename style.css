@@ -77,6 +77,10 @@ h1 {
   opacity: 0;
 }
 
+.remove {
+  display: none;
+}
+
 .primary {
   color: #16D9E3;
 }
@@ -116,6 +120,22 @@ h1 {
 #newGame:hover {
   box-shadow: 0px 7px 20px -4px #607d8b;
   transform: translateY(-2px);
+}
+
+.btn {
+  background: unset;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 10px 30px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff;
+  transition: .3s ease;
+}
+
+.btn:hover {
+  background: #2f3843;
+  border-color: #2f3843;
 }
 
 @media all and (max-width: 567px) {

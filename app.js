@@ -3,8 +3,10 @@ const screens = document.querySelectorAll('.screen')
 const timeList = document.querySelector('.time-list')
 const timeEl = document.querySelector('#time')
 const board = document.querySelector('#board')
+const screenBorad = document.querySelector('.screen-board')
 let time = 0
 let score = 0
+var gameInterval
 
 startBtn.addEventListener('click', (event) => {
     event.preventDefault()
@@ -28,8 +30,18 @@ board.addEventListener('click', event => {
 })
 
 function startGame() {
-    setInterval(decreaseTime, 1000)
+    gameInterval = setInterval(decreaseTime, 1000)
     setTime(time)
+    if (board.children.length > 0) {
+        for (let i = 0; i < board.children.length; i++) {
+            const el = board.children[i];
+            el.remove()
+        }
+        const tryAgain = document.querySelector('.try_btn')
+        tryAgain.remove()
+        score = 0
+        timeEl.parentElement.classList.remove('remove')
+    }
     createRandomCircle()
 }
 
@@ -39,7 +51,7 @@ function decreaseTime() {
     } else {
         let current = --time
         if (current < 10) {
-            current =  `0${time}`
+            current = `0${time}`
         }
         setTime(current)
     }
@@ -50,15 +62,27 @@ function setTime(val) {
 }
 
 function finishGame() {
-    timeEl.parentNode.remove()
-    board.innerHTML = `<h1>Cчет: <span class="primary">${score}</span></h1>`
+    timeEl.parentElement.classList.add('remove')
+    board.innerHTML = `<h1>Score: <span class="primary">${score}</span></h1><button class="btn try_btn">Try Again!</button>`
+    clearInterval(gameInterval)
+
+
+    const tryAgain = document.querySelector('.try_btn')
+    tryAgain.addEventListener('click', event => {
+        screens.forEach(el => {
+            el.classList.remove('up')
+        });
+    })
 }
 
 function createRandomCircle() {
     const circle = document.createElement('div')
     circle.classList.add('circle')
     const size = getRandomNum(20, 60)
-    const {width, height} = board.getBoundingClientRect()
+    const {
+        width,
+        height
+    } = board.getBoundingClientRect()
     const x = getRandomNum(0, width - size)
     const y = getRandomNum(0, height - size)
 
@@ -69,7 +93,7 @@ function createRandomCircle() {
 
     board.append(circle)
 }
+
 function getRandomNum(min, max) {
     return Math.round(Math.random() * (max - min) + min)
 }
-
