@@ -23,7 +23,7 @@ let scoreFirst = 0
 let scoreSec = 0
 let scoreThird = 0
 let gameInterval
-let interval = 500
+let interval = 1000
 
 // Check if user is already registered
 const cookieName = getCookie('name')
