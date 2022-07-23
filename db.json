@@ -2,7 +2,7 @@
     "db": [
         {
             "id": 0,
-            "device": "descktop",
+            "device": "desktop",
             "name": "Anvar",
             "scoreFirst": 15,
             "scoreSec": 25,

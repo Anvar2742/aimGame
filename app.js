@@ -274,7 +274,9 @@ function tableRender(data) {
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
-                    <td>${player.name}</td>
+                    <td><div class="name__td">
+                        ${player.name + deviceImg}                    
+                    </div></td>
                     <td>${player.scoreSec !== undefined ? player.scoreSec : 0}</td>
                 </tr>
             `)
@@ -285,7 +287,9 @@ function tableRender(data) {
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
-                    <td>${player.name}</td>
+                    <td><div class="name__td">
+                        ${player.name + deviceImg}                    
+                    </div></td>
                     <td>${player.scoreThird !== undefined ? player.scoreThird : 0}</td>
                 </tr>
             `)
