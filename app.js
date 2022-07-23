@@ -324,7 +324,7 @@ function getCookie(cName) {
     })
     return res;
 }
-
+console.log('cooool')
 
 const deviceType = () => {
     const ua = navigator.userAgent;
