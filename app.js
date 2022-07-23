@@ -16,12 +16,14 @@ const startAudio = new Audio("simon.mp3")
 const audio = new Audio("tap.mp3")
 const screenBorad = document.querySelector('.screen-board')
 let chosenTime = 0
+let chosenTimeMenu = 0
 let time = 0
 let score = 0
 let scoreFirst = 0
 let scoreSec = 0
 let scoreThird = 0
 let gameInterval
+let interval = 500
 
 // Check if user is already registered
 const cookieName = getCookie('name')
@@ -57,7 +59,7 @@ timeList.addEventListener('click', (event) => {
 
 menuTime.addEventListener('click', (event) => {
     if (event.target.classList.contains('time-btn')) {
-        chosenTime = +(event.target.getAttribute('data-time'))
+        chosenTimeMenu = +(event.target.getAttribute('data-time'))
 
         timeBtns.forEach(el => {
             el.classList.remove('active')
@@ -71,21 +73,15 @@ menuTime.addEventListener('click', (event) => {
 menuBar.addEventListener('click', (event) => {
     menu.classList.add('active')
     clearInterval(gameInterval)
-
-    if (chosenTime !== 0) {
-        timeBtns.forEach(el => {
-            el.classList.remove('active')
-
-            if (+(el.getAttribute('data-time')) === chosenTime) {
-                el.classList.add('active')
-            }
-        });
-    }
 })
 
 close.addEventListener('click', (event) => {
     menu.classList.remove('active')
-    gameInterval = setInterval(decreaseTime, 1000)
+
+    timeBtns.forEach(el => {
+        el.classList.remove('active')
+    });
+    gameInterval = setInterval(decreaseTime, interval)
 })
 
 board.addEventListener('click', event => {
@@ -99,7 +95,7 @@ board.addEventListener('click', event => {
 })
 
 function startGame() {
-    gameInterval = setInterval(decreaseTime, 1000)
+    gameInterval = setInterval(decreaseTime, interval)
     setTime(time)
     if (board.children.length > 0) {
         for (let i = 0; i < board.children.length; i++) {
@@ -218,63 +214,68 @@ const getData = () => {
                 }
                 data.push(playerObj)
             }
-            // db sort
-            function byField(field) {
-                return (a, b) => a[field] > b[field] ? -1 : 1;
-            }
-
             // Table render
-            topPlayersTable.querySelectorAll('tr').forEach(el => {
-                el.remove()
-            })
-
-            topPlayersTable.querySelector('thead').insertAdjacentHTML('beforeEnd', `
-                <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>Best Score</th>
-                </tr>
-            `)
-
-            if (chosenTime === 10) {
-                data.sort(byField('scoreFirst'));
-                data.forEach((player, index) => {
-                    topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
-                    <tr>
-                        <td>${++index}</td>
-                        <td>${player.name}</td>
-                        <td>${player.scoreFirst !== undefined ? player.scoreFirst : 0}</td>
-                    </tr>
-                `)
-                })
-            } else if (chosenTime === 20) {
-                data.sort(byField('scoreSec'));
-                data.forEach((player, index) => {
-                    topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
-                        <tr>
-                            <td>${++index}</td>
-                            <td>${player.name}</td>
-                            <td>${player.scoreSec !== undefined ? player.scoreSec : 0}</td>
-                        </tr>
-                    `)
-                })
-            } else {
-                data.sort(byField('scoreThird'));
-                data.forEach((player, index) => {
-                    topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
-                        <tr>
-                            <td>${++index}</td>
-                            <td>${player.name}</td>
-                            <td>${player.scoreThird !== undefined ? player.scoreThird : 0}</td>
-                        </tr>
-                    `)
-                })
-            }
+            tableRender(data)
             // db post
             postData(data)
         });
 
 
+}
+
+
+function tableRender(data) {
+
+    // db sort
+    function byField(field) {
+        return (a, b) => a[field] > b[field] ? -1 : 1;
+    }
+    topPlayersTable.querySelectorAll('tr').forEach(el => {
+        el.remove()
+    })
+
+    topPlayersTable.querySelector('thead').insertAdjacentHTML('beforeEnd', `
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Best Score</th>
+        </tr>
+    `)
+
+    if (chosenTimeMenu === +(timeBtns[0].getAttribute('data-time'))) {
+        data.sort(byField('scoreFirst'));
+        data.forEach((player, index) => {
+            topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
+            <tr>
+                <td>${++index}</td>
+                <td>${player.name}</td>
+                <td>${player.scoreFirst !== undefined ? player.scoreFirst : 0}</td>
+            </tr>
+        `)
+        })
+    } else if (chosenTimeMenu === +(timeBtns[1].getAttribute('data-time'))) {
+        data.sort(byField('scoreSec'));
+        data.forEach((player, index) => {
+            topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
+                <tr>
+                    <td>${++index}</td>
+                    <td>${player.name}</td>
+                    <td>${player.scoreSec !== undefined ? player.scoreSec : 0}</td>
+                </tr>
+            `)
+        })
+    } else {
+        data.sort(byField('scoreThird'));
+        data.forEach((player, index) => {
+            topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
+                <tr>
+                    <td>${++index}</td>
+                    <td>${player.name}</td>
+                    <td>${player.scoreThird !== undefined ? player.scoreThird : 0}</td>
+                </tr>
+            `)
+        })
+    }
 }
 
 
