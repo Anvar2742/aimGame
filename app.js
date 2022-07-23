@@ -24,6 +24,7 @@ let scoreSec = 0
 let scoreThird = 0
 let gameInterval
 let interval = 1000
+let deviceImg
 
 // Check if user is already registered
 const cookieName = getCookie('name')
@@ -208,6 +209,7 @@ const getData = () => {
                 let playerObj = {
                     id: id,
                     name: localStorage.getItem('name'),
+                    device: deviceType(),
                     scoreFirst: scoreFirst,
                     scoreSec: scoreSec,
                     scoreThird: scoreThird
@@ -244,11 +246,24 @@ function tableRender(data) {
 
     if (chosenTimeMenu === +(timeBtns[0].getAttribute('data-time'))) {
         data.sort(byField('scoreFirst'));
+
+
         data.forEach((player, index) => {
+            if (player.device === "mobile") {
+                deviceImg = "<img src='phone.svg'>"
+            } else if (player.device === "desktop") {
+                deviceImg = "<img src='desktop.svg'>"
+            } else if(player.device === "tablet") {
+                deviceImg = "<img src='tablet.svg'>"
+            } else {
+                deviceImg = ""
+            }
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
             <tr>
                 <td>${++index}</td>
-                <td>${player.name}</td>
+                <td><div class="name__td">
+                    ${player.name + deviceImg}                    
+                </div></td>
                 <td>${player.scoreFirst !== undefined ? player.scoreFirst : 0}</td>
             </tr>
         `)
@@ -305,3 +320,14 @@ function getCookie(cName) {
     })
     return res;
 }
+
+
+const deviceType = () => {
+    const ua = navigator.userAgent;
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+        return "tablet";
+    } else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+        return "mobile";
+    }
+    return "desktop";
+};

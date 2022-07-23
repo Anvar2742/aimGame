@@ -242,6 +242,18 @@ h1.realtime-score.hide {
   transition: .3s;
 }
 
+.name__td {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name__td img {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  max-width: 25px;
+}
+
 @media all and (max-width: 567px) {
   .board {
     width: 90%;
