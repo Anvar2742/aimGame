@@ -4,9 +4,9 @@
             "id": 0,
             "device": "desktop",
             "name": "Anvar",
-            "scoreFirst": 15,
-            "scoreSec": 25,
-            "scoreThird": 35
+            "scoreFirst": 0,
+            "scoreSec": 0,
+            "scoreThird": 0
         }
     ]
 }
