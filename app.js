@@ -3,6 +3,8 @@ const screens = document.querySelectorAll('.screen')
 const timeList = document.querySelector('.time-list')
 const timeEl = document.querySelector('#time')
 const board = document.querySelector('#board')
+const startAudio = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3")
+const audio = new Audio("tap.mp3")
 const screenBorad = document.querySelector('.screen-board')
 let time = 0
 let score = 0
@@ -11,6 +13,7 @@ var gameInterval
 startBtn.addEventListener('click', (event) => {
     event.preventDefault()
     screens[0].classList.add('up')
+    startAudio.play()
 })
 
 timeList.addEventListener('click', (event) => {
@@ -26,6 +29,7 @@ board.addEventListener('click', event => {
         score++
         event.target.remove()
         createRandomCircle()
+        audio.play()
     }
 })
 
@@ -42,6 +46,7 @@ function startGame() {
         score = 0
         timeEl.parentElement.classList.remove('remove')
     }
+    startAudio.play()
     createRandomCircle()
 }
 
@@ -69,9 +74,11 @@ function finishGame() {
 
     const tryAgain = document.querySelector('.try_btn')
     tryAgain.addEventListener('click', event => {
-        screens.forEach(el => {
+        for (let i = 1; i < screens.length; i++) {
+            const el = screens[i];
             el.classList.remove('up')
-        });
+        }
+        startAudio.play()
     })
 }
 
@@ -97,3 +104,7 @@ function createRandomCircle() {
 function getRandomNum(min, max) {
     return Math.round(Math.random() * (max - min) + min)
 }
+
+fetch('https://jsonplaceholder.typicode.com/todos/1') //api for the get request
+    .then(response => response.json())
+    .then(data => console.log(data));
