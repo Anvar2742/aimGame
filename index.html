@@ -9,14 +9,47 @@
 </head>
 
 <body>
+  <button class="menu__bar btn__border">
+    Menu
+  </button>
+  <div class="menu">
+    <ul class="time-list" id="menuTime">
+      <li>
+        <button class="time-btn" data-time="10">
+          10 sec
+        </button>
+      </li>
+      <li>
+        <button class="time-btn" data-time="20">
+          20 sec
+        </button>
+      </li>
+      <li>
+        <button class="time-btn" data-time="30">
+          30 sec
+        </button>
+      </li>
+    </ul>
+    <table class="top__players">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+    <button class="close btn__border">
+      X
+    </button>
+  </div>
+
   <div class="screen">
     <h1>Aim Training</h1>
+    <div class="registr">
+      <input type="text" id="name" class="name__input" placeholder="Your name">
+    </div>
     <a href="#" class="start" id="start">Start the game</a>
   </div>
 
   <div class="screen">
     <h1>Choose time</h1>
-    <ul class="time-list">
+    <ul class="time-list" id="timeList">
       <li>
         <button class="time-btn" data-time="10">
           10 sec
@@ -38,6 +71,7 @@
   <div class="screen screen-board">
     <h3>Time left: <span id="time">00:00</span></h3>
     <div class="board" id="board"></div>
+    <h1 class="realtime-score hide">Score: <span class="primary">0</span></h1>
   </div>
 
   <script type="module">

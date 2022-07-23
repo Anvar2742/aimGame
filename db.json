@@ -1,0 +1,18 @@
+{
+    "db": [
+        {
+            "id": 0,
+            "name": "Anvar",
+            "scoreFirst": 15,
+            "scoreSec": 25,
+            "scoreThird": 35
+        },
+        {
+            "id": 1,
+            "name": "Baris",
+            "scoreFirst": 5,
+            "scoreSec": 25,
+            "scoreThird": 75
+        }
+    ]
+}

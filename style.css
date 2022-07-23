@@ -19,11 +19,19 @@ a {
 }
 
 a:hover {
-  color: #16D9E3;
+  background: #fff;
+  color: #333;
 }
 
 .start {
   font-size: 1.5rem;
+  padding: 10px 40px;
+  padding-top: 13px;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  margin-top: 60px;
+  background: #333;
+  transition: .3s;
 }
 
 h1 {
@@ -68,7 +76,8 @@ h1 {
   font-size: 1.5rem;
 }
 
-.time-btn:hover {
+.time-btn:hover,
+.time-btn.active {
   border: 2px solid #16D9E3;
   color: #16D9E3;
 }
@@ -138,6 +147,101 @@ h1 {
   border-color: #2f3843;
 }
 
+.btn__border {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  border: 0;
+  background: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: .3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.close {
+  border: 1px solid transparent;
+  position: absolute;
+}
+
+.btn__border:hover {
+  border-color: #fff;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  opacity: 0;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  transition: .3s ease;
+  overflow-y: auto;
+  padding-bottom: 60px;
+  z-index: 2;
+}
+
+.menu.active {
+  left: 0;
+  opacity: 1;
+}
+
+.menu table th,
+.menu table td {
+  border: 1px solid;
+  padding: 15px;
+  font-size: 28px;
+}
+
+.menu table {
+  border-collapse: collapse;
+  max-width: 90%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.menu table th {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.menu table th:not(:last-child) {
+  border-right-color: #000;
+}
+
+.name__input {
+  background: unset;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  padding: 10px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.name__input::placeholder {
+  color: #fff;
+  opacity: .7;
+}
+
+h1.realtime-score.hide {
+  bottom: -100%;
+  opacity: 0;
+}
+
+.realtime-score {
+  position: absolute;
+  right: 10%;
+  font-size: 60px;
+  font-weight: 700;
+  bottom: unset;
+  opacity: 1;
+  transition: .3s;
+}
+
 @media all and (max-width: 567px) {
   .board {
     width: 90%;
@@ -148,5 +252,27 @@ h1 {
   h1 {
     line-height: 1;
     font-size: 3rem;
+  }
+
+  .realtime-score {
+    bottom: 0;
+    margin: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    right: unset;
+  }
+
+  .menu table th,
+  .menu table td {
+    font-size: 20px;
+  }
+
+  .time-btn {
+    font-size: 1rem;
+  }
+
+  .menu {
+    padding-top: 50px;
   }
 }
