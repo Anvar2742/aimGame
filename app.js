@@ -34,7 +34,7 @@ if (cookieName) {
 
 startBtn.addEventListener('click', (event) => {
     event.preventDefault()
-    let name
+    let name = false
     if (cookieName) {
         name = cookieName
     } else {
@@ -205,6 +205,8 @@ const getData = () => {
 
             let id = data[data.length - 1].id + 1
 
+            // console.log(data)
+
             if (match == -1) {
                 let playerObj = {
                     id: id,
@@ -225,6 +227,17 @@ const getData = () => {
 
 }
 
+
+function createId() {
+    let id = 0
+    fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
+        .then(response => response.json())
+        .then(data => {
+            id = data[data.length - 1].id + 1
+        });
+
+    return id
+}
 
 function tableRender(data) {
 
@@ -253,7 +266,7 @@ function tableRender(data) {
                 deviceImg = "<img src='phone.svg'>"
             } else if (player.device === "desktop") {
                 deviceImg = "<img src='desktop.svg'>"
-            } else if(player.device === "tablet") {
+            } else if (player.device === "tablet") {
                 deviceImg = "<img src='tablet.svg'>"
             } else {
                 deviceImg = ""
@@ -324,7 +337,7 @@ function getCookie(cName) {
     })
     return res;
 }
-console.log('cooool')
+console.log('cooool');
 
 const deviceType = () => {
     const ua = navigator.userAgent;
@@ -335,3 +348,15 @@ const deviceType = () => {
     }
     return "desktop";
 };
+
+const deleteAllCookies = () => {
+    const cookies = document.cookie.split(";");
+  
+    for (const cookie of cookies) {
+      const eqPos = cookie.indexOf("=");
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+  }
+  
+//   deleteAllCookies()
