@@ -70,6 +70,7 @@ menuTime.addEventListener('click', (event) => {
 
 menuBar.addEventListener('click', (event) => {
     menu.classList.add('active')
+    clearInterval(gameInterval)
 
     if (chosenTime !== 0) {
         timeBtns.forEach(el => {
@@ -84,6 +85,7 @@ menuBar.addEventListener('click', (event) => {
 
 close.addEventListener('click', (event) => {
     menu.classList.remove('active')
+    gameInterval = setInterval(decreaseTime, 1000)
 })
 
 board.addEventListener('click', event => {
@@ -203,9 +205,12 @@ const getData = () => {
                     data[match].scoreThird = scoreThird
                 }
             }
+
+            let id = data[data.length - 1].id + 1
+
             if (match == -1) {
                 let playerObj = {
-                    id: 3,
+                    id: id,
                     name: localStorage.getItem('name'),
                     scoreFirst: scoreFirst,
                     scoreSec: scoreSec,
