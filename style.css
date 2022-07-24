@@ -232,13 +232,14 @@ h1.realtime-score.hide {
 }
 
 .realtime-score {
-  position: absolute;
-  right: 10%;
   font-size: 60px;
   font-weight: 700;
   bottom: unset;
   opacity: 1;
   transition: .3s;
+  margin: 10px 0;
+  line-height: 1;
+  margin-bottom: -20px;
 }
 
 .name__td {
