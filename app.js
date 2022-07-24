@@ -456,6 +456,8 @@ function resetAll() {
     })
 }
 
+resetAll()
+
 const deleteAllCookies = () => {
     const cookies = document.cookie.split(";");
 
