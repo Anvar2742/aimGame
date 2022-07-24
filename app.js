@@ -12,6 +12,8 @@ const realtimeScore = document.querySelector('.realtime-score')
 const topPlayersTable = document.querySelector('.top__players')
 const registr = document.querySelector('.registr')
 const nameInput = document.querySelector('#name')
+const timeLeft = document.querySelector('.time_left')
+const countDownEl = document.querySelector('.countdown')
 const startAudio = new Audio("simon.mp3")
 const audio = new Audio("tap.mp3")
 const screenBorad = document.querySelector('.screen-board')
@@ -23,6 +25,8 @@ let scoreFirst = 0
 let scoreSec = 0
 let scoreThird = 0
 let gameInterval
+let countTime = 2
+let startInterval
 let interval = 1000
 
 // Check if has cookies
@@ -47,7 +51,7 @@ startBtn.addEventListener('click', (event) => {
     if (cookieName) {
         screens[0].classList.add('up')
         startAudio.play()
-        localStorage.setItem('name', cookieName);
+        localStorage.setItem('name', cookieName)
     } else {
         checkName(name)
     }
@@ -57,8 +61,17 @@ timeList.addEventListener('click', (event) => {
     if (event.target.classList.contains('time-btn')) {
         time = +(event.target.getAttribute('data-time'))
         chosenTime = +(event.target.getAttribute('data-time'))
+        countTime = 2
+
+        countDownEl.classList.remove('remove')
+        startInterval = setInterval(countDown, interval)
         screens[1].classList.add('up')
-        startGame()
+
+        setTimeout(() => {
+            countDownEl.innerHTML = 3
+            clearInterval(startInterval)
+            startGame()
+        }, 3000);
     }
 })
 
@@ -103,6 +116,7 @@ board.addEventListener('click', event => {
 })
 
 function startGame() {
+    timeLeft.classList.remove('remove')
     gameInterval = setInterval(decreaseTime, interval)
     setTime(time)
     if (board.children.length > 0) {
@@ -116,6 +130,7 @@ function startGame() {
         timeEl.parentElement.classList.remove('remove')
     }
 
+    countDownEl.classList.add('remove')
     realtimeScore.classList.remove('hide')
     startAudio.play()
     createRandomCircle()
@@ -131,6 +146,12 @@ function decreaseTime() {
         }
         setTime(current)
     }
+}
+
+function countDown() {
+    countDownEl.innerHTML = countTime
+    countTime--
+    return countTime
 }
 
 function setTime(val) {
@@ -155,6 +176,15 @@ function finishGame() {
 
     const tryAgain = document.querySelector('.try_btn')
     tryAgain.addEventListener('click', event => {
+        if (board.children.length > 0) {
+            for (let i = 0; i < board.children.length; i++) {
+                const el = board.children[i];
+                el.remove()
+            }
+
+            tryAgain.remove()
+            score = 0
+        }
         for (let i = 1; i < screens.length; i++) {
             const el = screens[i];
             el.classList.remove('up')
