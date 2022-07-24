@@ -291,6 +291,22 @@ p.error_input {
   display: none;
 }
 
+.screen-board {
+  position: relative;
+}
+
+.restart {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  width: 100px;
+  background: #fff;
+  border: unset;
+  border-radius: 50%;
+  padding: 10px 13px;
+  cursor: pointer;
+}
+
 @media all and (max-width: 567px) {
 
   .board {

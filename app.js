@@ -14,6 +14,7 @@ const registr = document.querySelector('.registr')
 const nameInput = document.querySelector('#name')
 const timeLeft = document.querySelector('.time_left')
 let countDownEl = document.querySelector('.countdown')
+let restartBtn = document.querySelector('.restart')
 const startAudio = new Audio("sounds/tap_sound.mp3")
 const audio = new Audio("sounds/tap.mp3")
 const countSound = new Audio("sounds/countdown.mp3")
@@ -56,6 +57,28 @@ startBtn.addEventListener('click', (event) => {
         localStorage.setItem('name', cookieName)
     } else {
         checkName(name)
+    }
+})
+
+restartBtn.addEventListener('click', (event) => {
+    if (!(countTime > 0)) {
+        if (board.children.length > 0) {
+            for (let i = 0; i < board.children.length; i++) {
+                const el = board.children[i];
+                el.remove()
+            }
+
+            score = 0
+        }
+        clearInterval(gameInterval)
+
+        finishGame()
+        for (let i = 1; i < screens.length; i++) {
+            const el = screens[i];
+            el.classList.remove('up')
+        }
+        startAudio.play()
+        board.innerHTML = '<div class="countdown primary remove"><span>3</span></div>'
     }
 })
 
@@ -287,11 +310,6 @@ function checkName(name) {
     fetch(firebase) //api for the get request
         .then(response => response.json())
         .then(data => {
-            data.forEach((player) => {
-                if (player.name === 'Писька') {
-                    console.log('писька!');
-                }
-            })
             const randomNames = ['Cool Kiddo', 'Lazy Cat', 'Stalin', 'Makarena', 'Chaka Paka', 'Alpaka']
             let match = data.findIndex(player => player.name == name)
             if (name.trim().length === 0) {
@@ -321,13 +339,6 @@ function createPlayer() {
             data.forEach((player) => {
                 if (id < player.id + 1) {
                     id = player.id + 1
-                }
-            })
-
-
-            data.forEach((player) => {
-                if (player.name === 'Писька') {
-                    player.name = 'Паша'
                 }
             })
 
@@ -488,15 +499,3 @@ const deleteAllCookies = () => {
 
 
 console.log('%cDeveloped by Anvar Musaev', "color: #fff; font-size: 16px; background: #000; padding: 5px;")
-
-// fetch(firebase) //api for the get request
-//     .then(response => response.json())
-//     .then(data => {
-//         data.forEach((player) => {
-//             if (player.name === 'Писька') {
-//                 player.name = 'Паша'
-//             }
-//         })
-//         // db post
-//         postData(data)
-//     });
