@@ -87,6 +87,9 @@ close.addEventListener('click', (event) => {
         el.classList.remove('active')
     });
     gameInterval = setInterval(decreaseTime, interval)
+    topPlayersTable.querySelectorAll('tr').forEach(el => {
+        el.remove()
+    })
 })
 
 board.addEventListener('click', event => {
@@ -221,11 +224,12 @@ function checkName(name) {
     fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
         .then(response => response.json())
         .then(data => {
-            const randomNames = ['Cool Kiddo', 'Lazy Cat', 'Stalin', 'Makarena', 'Chaka Paka']
+            const randomNames = ['Cool Kiddo', 'Lazy Cat', 'Stalin', 'Makarena', 'Chaka Paka', 'Alpaka']
             let match = data.findIndex(player => player.name == name)
             if (name.trim().length === 0) {
                 alert("You need a name!")
-                nameInput.value = randomNames[Math.floor(Math.random() * randomNames.length - 1)]
+
+                nameInput.value = randomNames[Math.floor(Math.random() * randomNames.length)]
             } else {
                 if (match === -1) {
                     createPlayer()
