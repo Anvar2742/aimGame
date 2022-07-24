@@ -157,6 +157,8 @@ function finishGame() {
 
     realtimeScore.classList.add('hide')
     realtimeScore.querySelector('.primary').innerHTML = 0
+
+    getData()
 }
 
 function createRandomCircle() {
