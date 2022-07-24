@@ -320,7 +320,7 @@ function getCookie(cName) {
     })
     return res;
 }
-console.log('not cool, but okay');
+console.log('cool, but okay');
 
 const deviceType = () => {
     const ua = navigator.userAgent;
