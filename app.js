@@ -471,4 +471,4 @@ const deleteAllCookies = () => {
 // deleteAllCookies()
 
 
-console.log('%cCode by Anvar Musaev', "color: #fff; font-size: 16px; background: #000; padding: 5px;")
+console.log('%cDeveloped by Anvar Musaev', "color: #fff; font-size: 16px; background: #000; padding: 5px;")
