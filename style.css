@@ -293,8 +293,7 @@ p.error_input {
 
 @media all and (max-width: 567px) {
 
-  .board,
-  .countdown {
+  .board {
     width: 90%;
     height: 400px;
     margin: 0 auto;
