@@ -39,7 +39,6 @@ startBtn.addEventListener('click', (event) => {
     } else {
         name = nameInput.value
         createPlayer()
-        console.log(cookieName)
     }
     if (name) {
         screens[0].classList.add('up')
@@ -158,7 +157,6 @@ function finishGame() {
 
     realtimeScore.classList.add('hide')
     realtimeScore.querySelector('.primary').innerHTML = 0
-    createPlayer()
 }
 
 function createRandomCircle() {
@@ -258,7 +256,7 @@ function tableRender(data) {
             <tr>
                 <td>${++index}</td>
                 <td><div class="name__td">
-                    ${player.name + detectImg(data)}                    
+                    ${player.name + detectImg(player.device)}                    
                 </div></td>
                 <td>${player.scoreFirst !== undefined ? player.scoreFirst : 0}</td>
             </tr>
@@ -266,13 +264,13 @@ function tableRender(data) {
         })
     } else if (chosenTimeMenu === +(timeBtns[1].getAttribute('data-time'))) {
         data.sort(byField('scoreSec'));
-        
+
         data.forEach((player, index) => {
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
                     <td><div class="name__td">
-                        ${player.name + detectImg(data)}                    
+                        ${player.name + detectImg(player.device)}                    
                     </div></td>
                     <td>${player.scoreSec !== undefined ? player.scoreSec : 0}</td>
                 </tr>
@@ -280,13 +278,13 @@ function tableRender(data) {
         })
     } else {
         data.sort(byField('scoreThird'));
-        
+
         data.forEach((player, index) => {
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
                     <td><div class="name__td">
-                        ${player.name + detectImg(data)}                    
+                        ${player.name + detectImg(player.device)}                    
                     </div></td>
                     <td>${player.scoreThird !== undefined ? player.scoreThird : 0}</td>
                 </tr>
@@ -334,19 +332,17 @@ const deviceType = () => {
     return "desktop";
 };
 
-function detectImg(data) {
+function detectImg(playerDevice) {
     let deviceImg
-    data.forEach((player) => {
-        if (player.device === "mobile") {
-            deviceImg = "<img src='phone.svg'>"
-        } else if (player.device === "desktop") {
-            deviceImg = "<img src='desktop.svg'>"
-        } else if (player.device === "tablet") {
-            deviceImg = "<img src='tablet.svg'>"
-        } else {
-            deviceImg = ""
-        }
-    })
+    if (playerDevice === "mobile") {
+        deviceImg = "<img src='phone.svg'>"
+    } else if (playerDevice === "desktop") {
+        deviceImg = "<img src='desktop.svg'>"
+    } else if (playerDevice === "tablet") {
+        deviceImg = "<img src='tablet.svg'>"
+    } else {
+        deviceImg = ""
+    }
 
     return deviceImg
 }
