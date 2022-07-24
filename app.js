@@ -14,9 +14,9 @@ const registr = document.querySelector('.registr')
 const nameInput = document.querySelector('#name')
 const timeLeft = document.querySelector('.time_left')
 let countDownEl = document.querySelector('.countdown')
-const startAudio = new Audio("simon.mp3")
-const audio = new Audio("tap.mp3")
-const countSound = new Audio("countdown.mp3")
+const startAudio = new Audio("sounds/simon.mp3")
+const audio = new Audio("sounds/tap.mp3")
+const countSound = new Audio("sounds/countdown.mp3")
 const screenBorad = document.querySelector('.screen-board')
 let chosenTime = 0
 let chosenTimeMenu = 0
@@ -439,11 +439,11 @@ const deviceType = () => {
 function detectImg(playerDevice) {
     let deviceImg
     if (playerDevice === "mobile") {
-        deviceImg = "<img src='phone.svg'>"
+        deviceImg = "<img src='icons/phone.svg'>"
     } else if (playerDevice === "desktop") {
-        deviceImg = "<img src='desktop.svg'>"
+        deviceImg = "<img src='icons/desktop.svg'>"
     } else if (playerDevice === "tablet") {
-        deviceImg = "<img src='tablet.svg'>"
+        deviceImg = "<img src='icons/tablet.svg'>"
     } else {
         deviceImg = ""
     }
