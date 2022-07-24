@@ -320,7 +320,7 @@ function getCookie(cName) {
     })
     return res;
 }
-console.log('cool, but okay');
+console.log('cooool, but okay');
 
 const deviceType = () => {
     const ua = navigator.userAgent;
@@ -357,4 +357,4 @@ const deleteAllCookies = () => {
     }
 }
 
-  deleteAllCookies()
+//   deleteAllCookies()
