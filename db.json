@@ -1,5 +1,21 @@
 {
     "db": [{
+            "device": "desktop",
+            "id": 4,
+            "name": "Borisss",
+            "scoreFirst": 11,
+            "scoreSec": 18,
+            "scoreThird": 55
+        },
+        {
+            "device": "mobile",
+            "id": 1,
+            "name": "Anvar",
+            "scoreFirst": 34,
+            "scoreSec": 35,
+            "scoreThird": 0
+        },
+        {
             "device": "mobile",
             "id": 2,
             "name": "Леруся",
@@ -9,27 +25,11 @@
         },
         {
             "device": "mobile",
-            "id": 1,
-            "name": "Anvar",
-            "scoreFirst": 18,
-            "scoreSec": 35,
-            "scoreThird": 0
-        },
-        {
-            "device": "mobile",
             "id": 5,
             "name": "Medi ",
             "scoreFirst": 18,
             "scoreSec": 0,
             "scoreThird": 0
-        },
-        {
-            "device": "desktop",
-            "id": 4,
-            "name": "Borisss",
-            "scoreFirst": 11,
-            "scoreSec": 18,
-            "scoreThird": 27
         }
     ]
 }

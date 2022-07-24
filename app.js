@@ -29,6 +29,7 @@ let gameInterval
 let countTime = 2
 let startInterval
 let interval = 1000
+const firebase = config.firabaseUrl
 
 // Check if has cookies
 const cookieName = getCookie('name')
@@ -254,7 +255,7 @@ function getRandomNum(min, max) {
 }
 
 const getData = () => {
-    fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
+    fetch('firebase') //api for the get request
         .then(response => response.json())
         .then(data => {
             let match = data.findIndex(player => player.name == localStorage.getItem('name'))
@@ -280,7 +281,7 @@ const getData = () => {
 }
 
 function checkName(name) {
-    fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
+    fetch('firebase') //api for the get request
         .then(response => response.json())
         .then(data => {
             const randomNames = ['Cool Kiddo', 'Lazy Cat', 'Stalin', 'Makarena', 'Chaka Paka', 'Alpaka']
@@ -305,7 +306,7 @@ function checkName(name) {
 }
 
 function createPlayer() {
-    fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
+    fetch('firebase') //api for the get request
         .then(response => response.json())
         .then(data => {
             let id = 0
@@ -331,7 +332,7 @@ function createPlayer() {
 }
 
 function tableRender() {
-    fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
+    fetch(firebase) //api for the get request
         .then(response => response.json())
         .then(data => {
 
@@ -399,7 +400,7 @@ function tableRender() {
 
 
 function postData(data) {
-    fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json', {
+    fetch('firebase', {
         method: 'PUT',
         body: JSON.stringify(data), // The data
     }).then((res) => res.json())
