@@ -24,7 +24,6 @@ let scoreSec = 0
 let scoreThird = 0
 let gameInterval
 let interval = 1000
-let deviceImg
 
 // Check if user is already registered
 const cookieName = getCookie('name')
@@ -159,7 +158,7 @@ function finishGame() {
 
     realtimeScore.classList.add('hide')
     realtimeScore.querySelector('.primary').innerHTML = 0
-    getData()
+    createPlayer()
 }
 
 function createRandomCircle() {
@@ -251,18 +250,6 @@ function tableRender(data) {
         </tr>
     `)
 
-    data.forEach((player) => {
-        if (player.device === "mobile") {
-            deviceImg = "<img src='phone.svg'>"
-        } else if (player.device === "desktop") {
-            deviceImg = "<img src='desktop.svg'>"
-        } else if (player.device === "tablet") {
-            deviceImg = "<img src='tablet.svg'>"
-        } else {
-            deviceImg = ""
-        }
-    })
-
     if (chosenTimeMenu === +(timeBtns[0].getAttribute('data-time'))) {
         data.sort(byField('scoreFirst'));
 
@@ -271,7 +258,7 @@ function tableRender(data) {
             <tr>
                 <td>${++index}</td>
                 <td><div class="name__td">
-                    ${player.name + deviceImg}                    
+                    ${player.name + detectImg(data)}                    
                 </div></td>
                 <td>${player.scoreFirst !== undefined ? player.scoreFirst : 0}</td>
             </tr>
@@ -279,12 +266,13 @@ function tableRender(data) {
         })
     } else if (chosenTimeMenu === +(timeBtns[1].getAttribute('data-time'))) {
         data.sort(byField('scoreSec'));
+        
         data.forEach((player, index) => {
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
                     <td><div class="name__td">
-                        ${player.name + deviceImg}                    
+                        ${player.name + detectImg(data)}                    
                     </div></td>
                     <td>${player.scoreSec !== undefined ? player.scoreSec : 0}</td>
                 </tr>
@@ -292,12 +280,13 @@ function tableRender(data) {
         })
     } else {
         data.sort(byField('scoreThird'));
+        
         data.forEach((player, index) => {
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
                     <td><div class="name__td">
-                        ${player.name + deviceImg}                    
+                        ${player.name + detectImg(data)}                    
                     </div></td>
                     <td>${player.scoreThird !== undefined ? player.scoreThird : 0}</td>
                 </tr>
@@ -344,6 +333,23 @@ const deviceType = () => {
     }
     return "desktop";
 };
+
+function detectImg(data) {
+    let deviceImg
+    data.forEach((player) => {
+        if (player.device === "mobile") {
+            deviceImg = "<img src='phone.svg'>"
+        } else if (player.device === "desktop") {
+            deviceImg = "<img src='desktop.svg'>"
+        } else if (player.device === "tablet") {
+            deviceImg = "<img src='tablet.svg'>"
+        } else {
+            deviceImg = ""
+        }
+    })
+
+    return deviceImg
+}
 
 const deleteAllCookies = () => {
     const cookies = document.cookie.split(";");
