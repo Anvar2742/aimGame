@@ -39,6 +39,8 @@ startBtn.addEventListener('click', (event) => {
         name = cookieName
     } else {
         name = nameInput.value
+        createPlayer()
+        console.log(cookieName)
     }
     if (name) {
         screens[0].classList.add('up')
@@ -203,40 +205,32 @@ const getData = () => {
                 }
             }
 
-            let id = data[data.length - 1].id + 1
-
-            // console.log(data)
-
-            if (match == -1) {
-                let playerObj = {
-                    id: id,
-                    name: localStorage.getItem('name'),
-                    device: deviceType(),
-                    scoreFirst: scoreFirst,
-                    scoreSec: scoreSec,
-                    scoreThird: scoreThird
-                }
-                data.push(playerObj)
-            }
             // Table render
             tableRender(data)
-            // db post
-            postData(data)
         });
 
 
 }
 
 
-function createId() {
-    let id = 0
+function createPlayer() {
     fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
         .then(response => response.json())
         .then(data => {
-            id = data[data.length - 1].id + 1
-        });
+            let id = data[data.length - 1].id + 1
 
-    return id
+            let playerObj = {
+                id: id,
+                name: localStorage.getItem('name'),
+                device: deviceType(),
+                scoreFirst: scoreFirst,
+                scoreSec: scoreSec,
+                scoreThird: scoreThird
+            }
+            data.push(playerObj)
+            // db post
+            postData(data)
+        });
 }
 
 function tableRender(data) {
@@ -257,20 +251,22 @@ function tableRender(data) {
         </tr>
     `)
 
+    data.forEach((player) => {
+        if (player.device === "mobile") {
+            deviceImg = "<img src='phone.svg'>"
+        } else if (player.device === "desktop") {
+            deviceImg = "<img src='desktop.svg'>"
+        } else if (player.device === "tablet") {
+            deviceImg = "<img src='tablet.svg'>"
+        } else {
+            deviceImg = ""
+        }
+    })
+
     if (chosenTimeMenu === +(timeBtns[0].getAttribute('data-time'))) {
         data.sort(byField('scoreFirst'));
 
-
         data.forEach((player, index) => {
-            if (player.device === "mobile") {
-                deviceImg = "<img src='phone.svg'>"
-            } else if (player.device === "desktop") {
-                deviceImg = "<img src='desktop.svg'>"
-            } else if (player.device === "tablet") {
-                deviceImg = "<img src='tablet.svg'>"
-            } else {
-                deviceImg = ""
-            }
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
             <tr>
                 <td>${++index}</td>
@@ -337,7 +333,7 @@ function getCookie(cName) {
     })
     return res;
 }
-console.log('not cool, but okay'); 
+console.log('not cool, but okay');
 
 const deviceType = () => {
     const ua = navigator.userAgent;
@@ -351,12 +347,12 @@ const deviceType = () => {
 
 const deleteAllCookies = () => {
     const cookies = document.cookie.split(";");
-  
+
     for (const cookie of cookies) {
-      const eqPos = cookie.indexOf("=");
-      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
-  }
-  
+}
+
 //   deleteAllCookies()
