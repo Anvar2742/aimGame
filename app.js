@@ -258,7 +258,7 @@ function getRandomNum(min, max) {
 }
 
 const getData = () => {
-    fetch('firebase') //api for the get request
+    fetch(firebase) //api for the get request
         .then(response => response.json())
         .then(data => {
             let match = data.findIndex(player => player.name == localStorage.getItem('name'))
@@ -284,7 +284,7 @@ const getData = () => {
 }
 
 function checkName(name) {
-    fetch('firebase') //api for the get request
+    fetch(firebase) //api for the get request
         .then(response => response.json())
         .then(data => {
             const randomNames = ['Cool Kiddo', 'Lazy Cat', 'Stalin', 'Makarena', 'Chaka Paka', 'Alpaka']
@@ -309,7 +309,7 @@ function checkName(name) {
 }
 
 function createPlayer() {
-    fetch('firebase') //api for the get request
+    fetch(firebase) //api for the get request
         .then(response => response.json())
         .then(data => {
             let id = 0
@@ -403,7 +403,7 @@ function tableRender() {
 
 
 function postData(data) {
-    fetch('firebase', {
+    fetch(firebase, {
         method: 'PUT',
         body: JSON.stringify(data), // The data
     }).then((res) => res.json())
