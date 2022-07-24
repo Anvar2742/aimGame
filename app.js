@@ -193,6 +193,7 @@ const getData = () => {
             if (chosenTime === +(timeBtns[0].getAttribute('data-time'))) {
                 if (match !== -1 && data[match].scoreFirst < scoreFirst) {
                     data[match].scoreFirst = scoreFirst
+                    console.log(scoreFirst)
                 }
             } else if (chosenTime === +(timeBtns[1].getAttribute('data-time'))) {
                 if (match !== -1 && data[match].scoreSec < scoreSec) {
@@ -206,6 +207,8 @@ const getData = () => {
 
             // Table render
             tableRender(data)
+            // db post
+            postData(data)
         });
 
 
