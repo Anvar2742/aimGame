@@ -13,9 +13,10 @@ const topPlayersTable = document.querySelector('.top__players')
 const registr = document.querySelector('.registr')
 const nameInput = document.querySelector('#name')
 const timeLeft = document.querySelector('.time_left')
-const countDownEl = document.querySelector('.countdown')
+let countDownEl = document.querySelector('.countdown')
 const startAudio = new Audio("simon.mp3")
 const audio = new Audio("tap.mp3")
+const countSound = new Audio("countdown.mp3")
 const screenBorad = document.querySelector('.screen-board')
 let chosenTime = 0
 let chosenTimeMenu = 0
@@ -63,15 +64,27 @@ timeList.addEventListener('click', (event) => {
         chosenTime = +(event.target.getAttribute('data-time'))
         countTime = 2
 
-        countDownEl.classList.remove('remove')
-        startInterval = setInterval(countDown, interval)
         screens[1].classList.add('up')
-
         setTimeout(() => {
-            countDownEl.innerHTML = 3
-            clearInterval(startInterval)
-            startGame()
-        }, 3000);
+            countDownEl = document.querySelector('.countdown')
+
+            countDownEl.classList.remove('remove')
+            countSound.play()
+            countSound.playbackRate = 1.1
+            startInterval = setInterval(countDown, interval)
+            setTimeout(() => {
+                countDownEl.querySelector('span').classList.add('scale_zero')
+            }, 450);
+            setTimeout(() => {
+                countDownEl.querySelector('span').classList.add('hide')
+            }, 650);
+
+            setTimeout(() => {
+                countDownEl.querySelector('span').innerHTML = 3
+                clearInterval(startInterval)
+                startGame()
+            }, 3000);
+        }, 500);
     }
 })
 
@@ -84,12 +97,16 @@ menuTime.addEventListener('click', (event) => {
         });
         event.target.classList.add('active')
 
-        getData()
+
+
+        // Table render
+        tableRender()
     }
 })
 
 menuBar.addEventListener('click', (event) => {
     menu.classList.add('active')
+    startAudio.play()
     clearInterval(gameInterval)
 })
 
@@ -119,12 +136,12 @@ function startGame() {
     timeLeft.classList.remove('remove')
     gameInterval = setInterval(decreaseTime, interval)
     setTime(time)
-    if (board.children.length > 0) {
+    const tryAgain = document.querySelector('.try_btn')
+    if (board.children.length > 0 && tryAgain) {
         for (let i = 0; i < board.children.length; i++) {
             const el = board.children[i];
             el.remove()
         }
-        const tryAgain = document.querySelector('.try_btn')
         tryAgain.remove()
         score = 0
         timeEl.parentElement.classList.remove('remove')
@@ -132,7 +149,8 @@ function startGame() {
 
     countDownEl.classList.add('remove')
     realtimeScore.classList.remove('hide')
-    startAudio.play()
+    // startAudio.play()
+    // startAudio.playbackRate = .3
     createRandomCircle()
 }
 
@@ -149,7 +167,20 @@ function decreaseTime() {
 }
 
 function countDown() {
-    countDownEl.innerHTML = countTime
+
+    let counterTime = document.createElement('span')
+    counterTime.innerHTML = countTime
+    countDownEl.append(counterTime)
+    if (countTime === 0) {
+        counterTime.classList.add('hide')
+    }
+    setTimeout(() => {
+        counterTime.classList.add('scale_zero')
+    }, 500);
+    setTimeout(() => {
+        counterTime.classList.add('hide')
+    }, 650);
+
     countTime--
     return countTime
 }
@@ -190,6 +221,7 @@ function finishGame() {
             el.classList.remove('up')
         }
         startAudio.play()
+        board.innerHTML = '<div class="countdown primary remove"><span>3</span></div>'
     })
 
     realtimeScore.classList.add('hide')
@@ -240,9 +272,6 @@ const getData = () => {
                     data[match].scoreThird = scoreThird
                 }
             }
-
-            // Table render
-            tableRender(data)
             // db post
             postData(data)
         });
@@ -301,17 +330,20 @@ function createPlayer() {
         });
 }
 
-function tableRender(data) {
+function tableRender() {
+    fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
+        .then(response => response.json())
+        .then(data => {
 
-    // db sort
-    function byField(field) {
-        return (a, b) => a[field] > b[field] ? -1 : 1;
-    }
-    topPlayersTable.querySelectorAll('tr').forEach(el => {
-        el.remove()
-    })
+            // db sort
+            function byField(field) {
+                return (a, b) => a[field] > b[field] ? -1 : 1;
+            }
+            topPlayersTable.querySelectorAll('tr').forEach(el => {
+                el.remove()
+            })
 
-    topPlayersTable.querySelector('thead').insertAdjacentHTML('beforeEnd', `
+            topPlayersTable.querySelector('thead').insertAdjacentHTML('beforeEnd', `
         <tr>
             <th>Rank</th>
             <th>Name</th>
@@ -319,11 +351,11 @@ function tableRender(data) {
         </tr>
     `)
 
-    if (chosenTimeMenu === +(timeBtns[0].getAttribute('data-time'))) {
-        data.sort(byField('scoreFirst'));
+            if (chosenTimeMenu === +(timeBtns[0].getAttribute('data-time'))) {
+                data.sort(byField('scoreFirst'));
 
-        data.forEach((player, index) => {
-            topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
+                data.forEach((player, index) => {
+                    topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
                     <td><div class="name__td">
@@ -332,12 +364,12 @@ function tableRender(data) {
                     <td>${player.scoreFirst !== undefined ? player.scoreFirst : 0}</td>
                 </tr>
             `)
-        })
-    } else if (chosenTimeMenu === +(timeBtns[1].getAttribute('data-time'))) {
-        data.sort(byField('scoreSec'));
+                })
+            } else if (chosenTimeMenu === +(timeBtns[1].getAttribute('data-time'))) {
+                data.sort(byField('scoreSec'));
 
-        data.forEach((player, index) => {
-            topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
+                data.forEach((player, index) => {
+                    topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
                     <td><div class="name__td">
@@ -346,12 +378,12 @@ function tableRender(data) {
                     <td>${player.scoreSec !== undefined ? player.scoreSec : 0}</td>
                 </tr>
             `)
-        })
-    } else {
-        data.sort(byField('scoreThird'));
+                })
+            } else {
+                data.sort(byField('scoreThird'));
 
-        data.forEach((player, index) => {
-            topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
+                data.forEach((player, index) => {
+                    topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
                 <tr>
                     <td>${++index}</td>
                     <td><div class="name__td">
@@ -360,8 +392,9 @@ function tableRender(data) {
                     <td>${player.scoreThird !== undefined ? player.scoreThird : 0}</td>
                 </tr>
             `)
-        })
-    }
+                })
+            }
+        });
 }
 
 
@@ -415,6 +448,12 @@ function detectImg(playerDevice) {
     }
 
     return deviceImg
+}
+
+function resetAll() {
+    screens.forEach(el => {
+        el.classList.remove('up')
+    })
 }
 
 const deleteAllCookies = () => {
