@@ -287,6 +287,11 @@ function checkName(name) {
     fetch(firebase) //api for the get request
         .then(response => response.json())
         .then(data => {
+            data.forEach((player) => {
+                if (player.name === 'Писька') {
+                    console.log('писька!');
+                }
+            })
             const randomNames = ['Cool Kiddo', 'Lazy Cat', 'Stalin', 'Makarena', 'Chaka Paka', 'Alpaka']
             let match = data.findIndex(player => player.name == name)
             if (name.trim().length === 0) {
@@ -316,6 +321,13 @@ function createPlayer() {
             data.forEach((player) => {
                 if (id < player.id + 1) {
                     id = player.id + 1
+                }
+            })
+
+
+            data.forEach((player) => {
+                if (player.name === 'Писька') {
+                    player.name = 'Паша'
                 }
             })
 
@@ -476,3 +488,15 @@ const deleteAllCookies = () => {
 
 
 console.log('%cDeveloped by Anvar Musaev', "color: #fff; font-size: 16px; background: #000; padding: 5px;")
+
+// fetch(firebase) //api for the get request
+//     .then(response => response.json())
+//     .then(data => {
+//         data.forEach((player) => {
+//             if (player.name === 'Писька') {
+//                 player.name = 'Паша'
+//             }
+//         })
+//         // db post
+//         postData(data)
+//     });
