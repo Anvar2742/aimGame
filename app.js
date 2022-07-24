@@ -25,27 +25,31 @@ let scoreThird = 0
 let gameInterval
 let interval = 1000
 
-// Check if user is already registered
+// Check if has cookies
 const cookieName = getCookie('name')
 if (cookieName) {
     registr.innerHTML = `<h2>Welcome, ${cookieName}!</h2>`
 }
 
+nameInput.addEventListener('input', (event) => {
+    let maxLength = +(nameInput.getAttribute('maxlength'))
+    const errorInput = document.querySelector('.error_input')
+    if (nameInput.value.length === maxLength) {
+        errorInput.innerHTML = `Limit is ${maxLength} characters;)`
+    } else {
+        errorInput.innerHTML = ``
+    }
+})
+
 startBtn.addEventListener('click', (event) => {
     event.preventDefault()
-    let name = false
+    let name = nameInput.value
     if (cookieName) {
-        name = cookieName
-    } else {
-        name = nameInput.value
-        createPlayer()
-    }
-    if (name) {
         screens[0].classList.add('up')
         startAudio.play()
-        localStorage.setItem('name', name);
-        // Apply setCookie
-        setCookie('name', name, 30);
+        localStorage.setItem('name', cookieName);
+    } else {
+        checkName(name)
     }
 })
 
@@ -193,7 +197,6 @@ const getData = () => {
             if (chosenTime === +(timeBtns[0].getAttribute('data-time'))) {
                 if (match !== -1 && data[match].scoreFirst < scoreFirst) {
                     data[match].scoreFirst = scoreFirst
-                    console.log(scoreFirst)
                 }
             } else if (chosenTime === +(timeBtns[1].getAttribute('data-time'))) {
                 if (match !== -1 && data[match].scoreSec < scoreSec) {
@@ -214,12 +217,41 @@ const getData = () => {
 
 }
 
+function checkName(name) {
+    fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
+        .then(response => response.json())
+        .then(data => {
+            const randomNames = ['Cool Kiddo', 'Lazy Cat', 'Stalin', 'Makarena', 'Chaka Paka']
+            let match = data.findIndex(player => player.name == name)
+            if (name.trim().length === 0) {
+                alert("You need a name!")
+                nameInput.value = randomNames[Math.floor(Math.random() * randomNames.length - 1)]
+            } else {
+                if (match === -1) {
+                    createPlayer()
+                    screens[0].classList.add('up')
+                    startAudio.play()
+                    localStorage.setItem('name', name);
+                    // Apply setCookie
+                    setCookie('name', name, 30);
+                } else {
+                    alert('Name already exists!')
+                }
+            }
+        })
+}
 
 function createPlayer() {
     fetch('https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json') //api for the get request
         .then(response => response.json())
         .then(data => {
-            let id = data[data.length - 1].id + 1
+            let id = 0
+            data.forEach((player) => {
+                if (id < player.id + 1) {
+                    id = player.id + 1
+                }
+            })
+
 
             let playerObj = {
                 id: id,
@@ -361,4 +393,4 @@ const deleteAllCookies = () => {
     }
 }
 
-//   deleteAllCookies()
+deleteAllCookies()
