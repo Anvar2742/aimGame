@@ -29,7 +29,7 @@ let gameInterval
 let countTime = 2
 let startInterval
 let interval = 1000
-const firebase = 'https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/aim_game_991_anv.json'
+const firebase = 'https://aim-game-a9de7-default-rtdb.europe-west1.firebasedatabase.app/db.json'
 
 // Check if has cookies
 const cookieName = getCookie('name')
