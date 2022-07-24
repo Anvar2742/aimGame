@@ -14,7 +14,7 @@ const registr = document.querySelector('.registr')
 const nameInput = document.querySelector('#name')
 const timeLeft = document.querySelector('.time_left')
 let countDownEl = document.querySelector('.countdown')
-const startAudio = new Audio("sounds/simon.mp3")
+const startAudio = new Audio("sounds/tap_sound.mp3")
 const audio = new Audio("sounds/tap_sound.mp3")
 const countSound = new Audio("sounds/countdown.mp3")
 const screenBorad = document.querySelector('.screen-board')
@@ -61,6 +61,7 @@ startBtn.addEventListener('click', (event) => {
 
 timeList.addEventListener('click', (event) => {
     if (event.target.classList.contains('time-btn')) {
+        startAudio.play()
         time = +(event.target.getAttribute('data-time'))
         chosenTime = +(event.target.getAttribute('data-time'))
         countTime = 2
@@ -91,6 +92,7 @@ timeList.addEventListener('click', (event) => {
 
 menuTime.addEventListener('click', (event) => {
     if (event.target.classList.contains('time-btn')) {
+        startAudio.play()
         chosenTimeMenu = +(event.target.getAttribute('data-time'))
 
         timeBtns.forEach(el => {
@@ -112,6 +114,7 @@ menuBar.addEventListener('click', (event) => {
 })
 
 close.addEventListener('click', (event) => {
+    startAudio.play()
     menu.classList.remove('active')
 
     timeBtns.forEach(el => {
