@@ -324,14 +324,14 @@ function tableRender(data) {
 
         data.forEach((player, index) => {
             topPlayersTable.querySelector('tbody').insertAdjacentHTML('beforeEnd', `
-            <tr>
-                <td>${++index}</td>
-                <td><div class="name__td">
-                    ${player.name + detectImg(player.device)}                    
-                </div></td>
-                <td>${player.scoreFirst !== undefined ? player.scoreFirst : 0}</td>
-            </tr>
-        `)
+                <tr>
+                    <td>${++index}</td>
+                    <td><div class="name__td">
+                        ${player.name + detectImg(player.device)}                    
+                    </div></td>
+                    <td>${player.scoreFirst !== undefined ? player.scoreFirst : 0}</td>
+                </tr>
+            `)
         })
     } else if (chosenTimeMenu === +(timeBtns[1].getAttribute('data-time'))) {
         data.sort(byField('scoreSec'));
