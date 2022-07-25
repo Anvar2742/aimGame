@@ -299,12 +299,16 @@ p.error_input {
   position: absolute;
   right: 10px;
   top: 20px;
-  width: 100px;
-  background: #fff;
+  width: 50px;
+  height: 50px;
   border: unset;
-  border-radius: 50%;
-  padding: 10px 13px;
   cursor: pointer;
+  background: unset;
+}
+
+.restart img {
+  width: 100%;
+  height: 100%;
 }
 
 @media all and (max-width: 567px) {

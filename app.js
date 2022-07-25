@@ -499,3 +499,16 @@ const deleteAllCookies = () => {
 
 
 console.log('%cDeveloped by Anvar Musaev', "color: #fff; font-size: 16px; background: #000; padding: 5px;")
+
+// fetch(firebase) //api for the get request
+//         .then(response => response.json())
+//         .then(data => {
+//             let id = 0
+//             data.forEach((player) => {
+//                 if (name === player.name) {
+//                     player.scoreFirst = 10
+//                 }
+//             })
+
+//             postData(data)
+//         });

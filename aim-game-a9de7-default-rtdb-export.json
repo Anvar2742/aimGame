@@ -1,0 +1,324 @@
+{
+  "db": [
+    {
+      "device": "desktop",
+      "id": 4,
+      "name": "Borisss",
+      "scoreFirst": 11,
+      "scoreSec": 18,
+      "scoreThird": 55
+    },
+    {
+      "device": "mobile",
+      "id": 1,
+      "name": "Anvar",
+      "scoreFirst": 34,
+      "scoreSec": 35,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 2,
+      "name": "Леруся",
+      "scoreFirst": 46,
+      "scoreSec": 84,
+      "scoreThird": 119
+    },
+    {
+      "device": "mobile",
+      "id": 5,
+      "name": "Medi ",
+      "scoreFirst": 18,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 6,
+      "name": "Alpaka",
+      "scoreFirst": 37,
+      "scoreSec": 8,
+      "scoreThird": 47
+    },
+    {
+      "device": "mobile",
+      "id": 7,
+      "name": "Damla",
+      "scoreFirst": 0,
+      "scoreSec": 41,
+      "scoreThird": 0
+    },
+    {
+      "device": "desktop",
+      "id": 8,
+      "name": "mintakaa",
+      "scoreFirst": 20,
+      "scoreSec": 0,
+      "scoreThird": 83
+    },
+    {
+      "device": "mobile",
+      "id": 9,
+      "name": "Xaker64",
+      "scoreFirst": 44,
+      "scoreSec": 83,
+      "scoreThird": 120
+    },
+    {
+      "device": "desktop",
+      "id": 10,
+      "name": "Max64",
+      "scoreFirst": 29,
+      "scoreSec": 53,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 11,
+      "name": "TildaLover",
+      "scoreFirst": 28,
+      "scoreSec": 55,
+      "scoreThird": 87
+    },
+    {
+      "device": "mobile",
+      "id": 12,
+      "name": "Elena",
+      "scoreFirst": 27,
+      "scoreSec": 57,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 13,
+      "name": "Kiko",
+      "scoreFirst": 25,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 14,
+      "name": "Your name",
+      "scoreFirst": 0,
+      "scoreSec": 0,
+      "scoreThird": 81
+    },
+    {
+      "device": "mobile",
+      "id": 15,
+      "name": "Котя",
+      "scoreFirst": 0,
+      "scoreSec": 0,
+      "scoreThird": 102
+    },
+    {
+      "device": "desktop",
+      "id": 16,
+      "name": "ыфв",
+      "scoreFirst": 19,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 17,
+      "name": "David ",
+      "scoreFirst": 34,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 18,
+      "name": "Gdg",
+      "scoreFirst": 32,
+      "scoreSec": 0,
+      "scoreThird": 103
+    },
+    {
+      "device": "mobile",
+      "id": 19,
+      "name": "кирюшик",
+      "scoreFirst": 0,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 20,
+      "name": "Irash",
+      "scoreFirst": 0,
+      "scoreSec": 0,
+      "scoreThird": 96
+    },
+    {
+      "device": "mobile",
+      "id": 21,
+      "name": "Паша",
+      "scoreFirst": 31,
+      "scoreSec": 0,
+      "scoreThird": 96
+    },
+    {
+      "device": "mobile",
+      "id": 22,
+      "name": "ОвощНаКирше",
+      "scoreFirst": 0,
+      "scoreSec": 0,
+      "scoreThird": 91
+    },
+    {
+      "device": "mobile",
+      "id": 23,
+      "name": "Gleb",
+      "scoreFirst": 0,
+      "scoreSec": 51,
+      "scoreThird": 0
+    },
+    {
+      "device": "tablet",
+      "id": 24,
+      "name": "New_Davka",
+      "scoreFirst": 36,
+      "scoreSec": 55,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 25,
+      "name": "Maxim",
+      "scoreFirst": 0,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 26,
+      "name": "Meow",
+      "scoreFirst": 32,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 27,
+      "name": "Алина",
+      "scoreFirst": 0,
+      "scoreSec": 40,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 28,
+      "name": "Julybon",
+      "scoreFirst": 36,
+      "scoreSec": 0,
+      "scoreThird": 93
+    },
+    {
+      "device": "tablet",
+      "id": 29,
+      "name": "Mari",
+      "scoreFirst": 0,
+      "scoreSec": 0,
+      "scoreThird": 66
+    },
+    {
+      "device": "mobile",
+      "id": 30,
+      "name": "Aleks",
+      "scoreFirst": 20,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 31,
+      "name": "PRO: PROGRAMMER",
+      "scoreFirst": 43,
+      "scoreSec": 84,
+      "scoreThird": 114
+    },
+    {
+      "device": "mobile",
+      "id": 32,
+      "name": "Inna",
+      "scoreFirst": 33,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 33,
+      "name": "Anna",
+      "scoreFirst": 0,
+      "scoreSec": 30,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 34,
+      "name": "Aboba",
+      "scoreFirst": 0,
+      "scoreSec": 50,
+      "scoreThird": 0
+    },
+    {
+      "device": "desktop",
+      "id": 35,
+      "name": "Anvar_Hack_",
+      "scoreFirst": 25,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "tablet",
+      "id": 36,
+      "name": "ilyas",
+      "scoreFirst": 0,
+      "scoreSec": 53,
+      "scoreThird": 0
+    },
+    {
+      "device": "desktop",
+      "id": 37,
+      "name": "Cool Kiddo",
+      "scoreFirst": 0,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 38,
+      "name": "Jopa",
+      "scoreFirst": 35,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 39,
+      "name": "L",
+      "scoreFirst": 34,
+      "scoreSec": 69,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 40,
+      "name": "eldar",
+      "scoreFirst": 17,
+      "scoreSec": 0,
+      "scoreThird": 0
+    },
+    {
+      "device": "mobile",
+      "id": 41,
+      "name": "Мария",
+      "scoreFirst": 28,
+      "scoreSec": 0,
+      "scoreThird": 0
+    }
+  ]
+}
